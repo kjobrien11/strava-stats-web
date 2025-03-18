@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Workout } from '../workout';
 
@@ -7,18 +7,27 @@ import { Workout } from '../workout';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) {}
-  url: string = "http://localhost:8080/stats"
+  url: string = "http://localhost:8080/stats";
+  workouts!: Workout[];
 
-  getAthleteStats() {
+  constructor(private http: HttpClient) {
+    this.intializeData();
+  }
+
+  private intializeData(): void {
+    console.log("LETS GO");
     this.http.get<Workout[]>(this.url).subscribe({
       next: (response) => {
-        console.log(response);
-        console.log(response[0].distance);
+        this.workouts = response;
       },
       error: (error) => {
         console.error('Error fetching athlete stats:', error);
       }
     });
   }
+
+  public getWorkouts(){
+    return this.workouts;
+  }
+
 }

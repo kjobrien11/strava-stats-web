@@ -13,8 +13,7 @@ export class GraphComponent {
   constructor(private apiService: ApiService){}
 
   getData(){
-    this.apiService.getAthleteStats();
-
+    console.log(this.apiService.getWorkouts());
   }
 
 }
