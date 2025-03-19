@@ -1,3 +1,16 @@
 <p>graph works!</p>
 
 <button (click) = "getData()">pull data</button>
+
+<ngx-charts-line-chart
+  [results]="lineChartData"
+  [gradient]="false"
+  [xAxis]="true"
+  [yAxis]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [xAxisLabel]="'Date'"
+  [yAxisLabel]="'Distance (km)'"
+  [autoScale]="true"
+>
+</ngx-charts-line-chart>
