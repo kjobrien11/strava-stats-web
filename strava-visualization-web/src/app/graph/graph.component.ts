@@ -3,11 +3,12 @@ import { ApiService } from '../services/api.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
+    standalone: true,
     selector: 'app-graph',
     imports: [NgxChartsModule],
     templateUrl: './graph.component.html',
     styleUrl: './graph.component.css',
-    standalone: true
+
 })
 export class GraphComponent implements OnInit {
   data!: any[];
