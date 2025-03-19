@@ -30,17 +30,25 @@ export class ApiService {
     return this.workouts;
   }
 
-  public getLineChartData(){
+  public getLineChartData() {
+    let totalDistance = 0; 
     let lineChartData = [
       {
         name: 'Distance',
-        series: this.workouts.map(item => ({
-          name: new Date(item.date).toLocaleDateString(),  // Formatting date as string
-          value: item.distance
-        }))
+        series: this.workouts.map(item => {
+          totalDistance += item.distance;
+          console.log(totalDistance);
+          return {
+            name: new Date(item.date).toLocaleDateString(), 
+            value: totalDistance 
+          };
+        })        
       }
+
     ];
     return lineChartData;
   }
+  
+ 
 
 }
