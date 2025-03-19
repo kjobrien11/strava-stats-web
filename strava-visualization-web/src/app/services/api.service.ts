@@ -33,7 +33,7 @@ export class ApiService {
 
   public getLineChartData()  {
     let totalDistance = 0; 
-    let paceDistance = 0;
+    let paceDistance = -20;
     let lineChartData = [
       {
         name: 'Distance',
@@ -50,7 +50,6 @@ export class ApiService {
         name: 'Distance',
         series: this.workouts.map(item => {
           paceDistance += 20;
-
           return {
             // name: new Date(item.date).toLocaleDateString(), 
             name: item.startDate,
