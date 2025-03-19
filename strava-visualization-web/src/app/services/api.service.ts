@@ -15,7 +15,6 @@ export class ApiService {
   }
 
   private intializeData(): void {
-    console.log("LETS GO");
     this.http.get<Workout[]>(this.url).subscribe({
       next: (response) => {
         this.workouts = response;

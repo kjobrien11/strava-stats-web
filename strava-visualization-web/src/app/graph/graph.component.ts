@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Workout } from '../workout';
 
 @Component({
     standalone: true,
@@ -11,7 +12,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 })
 export class GraphComponent implements OnInit {
-  data!: any[];
+  data!: Workout[];
   lineChartData!: any[];
 
   constructor(private apiService: ApiService){}
