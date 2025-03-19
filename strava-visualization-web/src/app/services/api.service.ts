@@ -47,7 +47,7 @@ export class ApiService {
         })        
       },
       {
-        name: 'Distance',
+        name: 'Pace',
         series: this.workouts.map(item => {
           paceDistance += 20;
           return {
