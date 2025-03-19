@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Workout } from '../workout';
+import { WeeklyTotal } from '../weekly-total';
 
 @Component({
     standalone: true,
