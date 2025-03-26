@@ -1,5 +1,6 @@
 <div class = "chart">
     <div class = "chart-item">
+        <div><h1>Distance over Time</h1></div>
         <ngx-charts-line-chart 
             [results]="lineChartData"
             [gradient]="false"
@@ -13,6 +14,7 @@
         </ngx-charts-line-chart>
     </div>
     <div class = "chart-item">
+        <div><h1>Distance by week</h1></div>
         <ngx-charts-bar-vertical
             [results]="barChartData"
             [xAxis]="true"
@@ -24,11 +26,7 @@
             [yAxisLabel]="'Distance (miles)'"
             [gradient]="false"
             [customColors]="customColors"
-            [yScaleMax] = "40.0"
-            >
+            [yScaleMax] = "40.0">
         </ngx-charts-bar-vertical>
     </div>
-    
-
-
 </div>
