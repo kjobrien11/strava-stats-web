@@ -15,6 +15,7 @@ import { WeeklyTotal } from '../weekly-total';
 export class GraphComponent implements OnInit {
   data!: Workout[];
   lineChartData!: any[];
+  barChartData!:any[]
 
   constructor(private apiService: ApiService){}
 
@@ -24,6 +25,9 @@ export class GraphComponent implements OnInit {
 
   getData(){
     this.lineChartData = this.apiService.getLineChartData();
+    this.barChartData = this.apiService.getBarChartData();
+    console.log(this.barChartData)
+    console.log(this.lineChartData)
   } 
 
 }

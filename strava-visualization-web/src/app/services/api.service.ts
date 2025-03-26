@@ -19,7 +19,6 @@ export class ApiService {
     this.http.get<WeeklyTotal[]>(this.url).subscribe({
       next: (response) => {
         this.workouts = response;
-        console.log(this.workouts);
       },
       error: (error) => {
         console.error('Error fetching athlete stats:', error);
@@ -32,17 +31,15 @@ export class ApiService {
   }
 
   public getLineChartData()  {
-    let totalDistance = 0; 
     let paceDistance = -20;
     let lineChartData = [
       {
         name: 'Distance',
         series: this.workouts.map(item => {
-          totalDistance += item.weekDistance;
 
           return {
             name: item.startDate,
-            value: totalDistance 
+            value: item.weekDistance 
           };
         })        
       },
@@ -51,7 +48,6 @@ export class ApiService {
         series: this.workouts.map(item => {
           paceDistance += 20;
           return {
-            // name: new Date(item.date).toLocaleDateString(), 
             name: item.startDate,
             value: paceDistance 
           };
@@ -60,6 +56,13 @@ export class ApiService {
 
     ];
     return lineChartData;
+  }
+
+  public getBarChartData()  {
+    return this.workouts.map(item => ({
+      name: item.startDate, 
+      value: item.weekDistance
+  }));
   }
   
  

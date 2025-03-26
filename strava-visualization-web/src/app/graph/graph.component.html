@@ -1,13 +1,31 @@
 <div class = "chart">
-    <ngx-charts-line-chart
-    [results]="lineChartData"
-    [gradient]="false"
-    [xAxis]="true"
-    [yAxis]="true"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    [xAxisLabel]="'Week'"
-    [yAxisLabel]="'Distance (miles)'"
-    [autoScale]="true">
-    </ngx-charts-line-chart>
+    <div class = "chart-item">
+        <ngx-charts-line-chart 
+            [results]="lineChartData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Week'"
+            [yAxisLabel]="'Distance (miles)'"
+            [autoScale]="true">
+        </ngx-charts-line-chart>
+    </div>
+    <div class = "chart-item">
+        <ngx-charts-bar-vertical
+            [results]="barChartData"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [showDataLabel]="true"
+            [xAxisLabel]="'Week'"
+            [yAxisLabel]="'Distance (miles)'"
+            [gradient]="false">
+        </ngx-charts-bar-vertical>
+    </div>
+    
+
+
 </div>

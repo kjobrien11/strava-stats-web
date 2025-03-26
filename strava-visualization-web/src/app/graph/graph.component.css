@@ -1,4 +1,10 @@
-.chart {
-    width: 80%;
+.chart-item {
     margin: 0 auto;
+    height: 50vh;
+    width: 80%;
+}
+.chart{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
