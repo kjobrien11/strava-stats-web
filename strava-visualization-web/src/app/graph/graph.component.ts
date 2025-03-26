@@ -16,6 +16,7 @@ export class GraphComponent implements OnInit {
   data!: Workout[];
   lineChartData!: any[];
   barChartData!:any[]
+  customColors!:any[]; 
 
   constructor(private apiService: ApiService){}
 
@@ -26,8 +27,8 @@ export class GraphComponent implements OnInit {
   getData(){
     this.lineChartData = this.apiService.getLineChartData();
     this.barChartData = this.apiService.getBarChartData();
-    console.log(this.barChartData)
-    console.log(this.lineChartData)
+    this.customColors = this.apiService.getCustomColors();
+    console.log(this.apiService.getCustomColors())
   } 
 
 }

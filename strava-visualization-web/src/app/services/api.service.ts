@@ -70,10 +70,17 @@ export class ApiService {
 
   public getBarChartData()  {
     return this.weeklyWorkoutData.map(item => ({
-      name: item.startDate, 
+      name: String(item.startDate), 
       value: item.weekDistance
-  }));
-  }
+      }));
+    }
+
+  public getCustomColors(){
+    return this.weeklyWorkoutData.map(item => ({
+      name: String(item.startDate),
+      value:"#A9CAB0"
+      }));
+    }
   
  
 
