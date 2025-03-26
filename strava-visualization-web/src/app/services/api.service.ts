@@ -8,17 +8,27 @@ import { WeeklyTotal } from '../weekly-total';
 })
 export class ApiService {
 
-  url: string = "http://localhost:8080/weekly-totals";
-  workouts!: WeeklyTotal[];
+  weeklyUrl: string = "http://localhost:8080/weekly-totals";
+  cumulativeUrl: string = "http://localhost:8080/cumulative-totals";
+  weeklyWorkoutData!: WeeklyTotal[];
+  cumulativeWorkoutData!: WeeklyTotal[];
 
   constructor(private http: HttpClient) {
     this.intializeData();
   }
 
   private intializeData(): void {
-    this.http.get<WeeklyTotal[]>(this.url).subscribe({
+    this.http.get<WeeklyTotal[]>(this.weeklyUrl).subscribe({
       next: (response) => {
-        this.workouts = response;
+        this.weeklyWorkoutData = response;
+      },
+      error: (error) => {
+        console.error('Error fetching athlete stats:', error);
+      }
+    });
+    this.http.get<WeeklyTotal[]>(this.cumulativeUrl).subscribe({
+      next: (response) => {
+        this.cumulativeWorkoutData = response;
       },
       error: (error) => {
         console.error('Error fetching athlete stats:', error);
@@ -27,7 +37,7 @@ export class ApiService {
   }
 
   public getWorkouts(){
-    return this.workouts;
+    return this.weeklyWorkoutData;
   }
 
   public getLineChartData()  {
@@ -35,7 +45,7 @@ export class ApiService {
     let lineChartData = [
       {
         name: 'Distance',
-        series: this.workouts.map(item => {
+        series: this.cumulativeWorkoutData.map(item => {
 
           return {
             name: item.startDate,
@@ -45,7 +55,7 @@ export class ApiService {
       },
       {
         name: 'Pace',
-        series: this.workouts.map(item => {
+        series: this.cumulativeWorkoutData.map(item => {
           paceDistance += 20;
           return {
             name: item.startDate,
@@ -59,7 +69,7 @@ export class ApiService {
   }
 
   public getBarChartData()  {
-    return this.workouts.map(item => ({
+    return this.weeklyWorkoutData.map(item => ({
       name: item.startDate, 
       value: item.weekDistance
   }));
