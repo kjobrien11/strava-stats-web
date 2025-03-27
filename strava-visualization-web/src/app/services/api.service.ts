@@ -2,6 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Workout } from '../workout';
 import { WeeklyTotal } from '../weekly-total';
+import { QuickData } from '../quick-data';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ export class ApiService {
 
   weeklyUrl: string = "http://localhost:8080/weekly-totals";
   cumulativeUrl: string = "http://localhost:8080/cumulative-totals";
+  totalDistanceUrl: string = "http://localhost:8080/distance-miles"
   weeklyWorkoutData!: WeeklyTotal[];
   cumulativeWorkoutData!: WeeklyTotal[];
 
@@ -82,6 +85,8 @@ export class ApiService {
       }));
     }
   
- 
+    public getTotalDistanceStats(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.totalDistanceUrl);
+    }
 
 }

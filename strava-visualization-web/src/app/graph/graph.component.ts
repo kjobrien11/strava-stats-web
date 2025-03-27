@@ -4,6 +4,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Workout } from '../workout';
 import { WeeklyTotal } from '../weekly-total';
 import { DataBoxComponent } from '../data-box/data-box.component';
+import { QuickData } from '../quick-data';
+import { Observable } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -18,18 +20,35 @@ export class GraphComponent implements OnInit {
   lineChartData!: any[];
   barChartData!:any[]
   customColors!:any[]; 
+  totalDistance!: QuickData;
 
   constructor(private apiService: ApiService){}
 
-  ngOnInit(): void {
-      this.getData();
-  }
+ngOnInit() {
+  this.getData();
+  this.getTotalDistanceStats().subscribe({
+    next: (response) => {
+      this.totalDistance = response;
+    },
+    error: (error) => {
+      console.error('Error fetching athlete stats:', error);
+      this.totalDistance = {
+        title: 'Total Distance',
+        value: 0,
+        units: 'miles',
+      };
+    }
+  });
+}
+
+public getTotalDistanceStats(): Observable<QuickData> {
+  return this.apiService.getTotalDistanceStats();
+}
 
   getData(){
     this.lineChartData = this.apiService.getLineChartData();
     this.barChartData = this.apiService.getBarChartData();
     this.customColors = this.apiService.getCustomColors();
-    console.log(this.apiService.getCustomColors())
   } 
 
 }
