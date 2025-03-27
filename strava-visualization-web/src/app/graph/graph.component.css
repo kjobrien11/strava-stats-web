@@ -2,7 +2,7 @@
     width: 80%;
     height: 20%;
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -12,12 +12,10 @@
 }
 
 .chart{ 
-    width: 100%;
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 }
 
 .quick-stats {
