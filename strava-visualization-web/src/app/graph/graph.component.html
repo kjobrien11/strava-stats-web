@@ -1,33 +1,45 @@
-<h1>Strava Stats Visualization!</h1>
-<div class = "chart">
-    <div class = "chart-item">
-        <h2>Distance over time</h2>
-        <ngx-charts-line-chart 
-            [results]="lineChartData"
-            [gradient]="false"
-            [xAxis]="true"
-            [yAxis]="true"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="true"
-            [xAxisLabel]="'Week'"
-            [yAxisLabel]="'Distance (miles)'"
-            [autoScale]="true">
-        </ngx-charts-line-chart>
+<div class= "container">
+    <h1>Strava Stats Visualization!</h1>
+    <div class = "chart">
+        <div class = "chart-item">
+            <h2>Distance over time</h2>
+            <ngx-charts-line-chart 
+                [results]="lineChartData"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="'Week'"
+                [yAxisLabel]="'Distance (miles)'"
+                [autoScale]="true">
+            </ngx-charts-line-chart>
+        </div>
+        <div class = "chart-item">
+            <h2>Distance by week</h2>
+            <ngx-charts-bar-vertical
+                [results]="barChartData"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [showDataLabel]="true"
+                [xAxisLabel]="'Week'"
+                [yAxisLabel]="'Distance (miles)'"
+                [gradient]="false"
+                [customColors]="customColors"
+                [yScaleMax] = "40.0">
+            </ngx-charts-bar-vertical>
+        </div>
+        <div class = "quick-stats">
+            <app-data-box></app-data-box>
+            <app-data-box></app-data-box>
+            <app-data-box></app-data-box>
+            <app-data-box></app-data-box>
+            <app-data-box></app-data-box>
+            <app-data-box></app-data-box>
+        </div>
+        
     </div>
-    <div class = "chart-item">
-        <h2>Distance by week</h2>
-        <ngx-charts-bar-vertical
-            [results]="barChartData"
-            [xAxis]="true"
-            [yAxis]="true"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="true"
-            [showDataLabel]="true"
-            [xAxisLabel]="'Week'"
-            [yAxisLabel]="'Distance (miles)'"
-            [gradient]="false"
-            [customColors]="customColors"
-            [yScaleMax] = "40.0">
-        </ngx-charts-bar-vertical>
-    </div>
+
 </div>

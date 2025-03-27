@@ -3,11 +3,12 @@ import { ApiService } from '../services/api.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Workout } from '../workout';
 import { WeeklyTotal } from '../weekly-total';
+import { DataBoxComponent } from '../data-box/data-box.component';
 
 @Component({
     standalone: true,
     selector: 'app-graph',
-    imports: [NgxChartsModule],
+    imports: [NgxChartsModule, DataBoxComponent],
     templateUrl: './graph.component.html',
     styleUrl: './graph.component.css',
 
