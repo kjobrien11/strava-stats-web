@@ -5,7 +5,7 @@ import { DataBoxComponent } from "./data-box/data-box.component";
 
 @Component({
     selector: 'app-root',
-    imports: [GraphComponent, DataBoxComponent],
+    imports: [GraphComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     standalone:true

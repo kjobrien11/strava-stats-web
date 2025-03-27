@@ -16,11 +16,10 @@ import { Observable } from 'rxjs';
 
 })
 export class GraphComponent implements OnInit {
-  data!: Workout[];
   lineChartData!: any[];
   barChartData!:any[]
   customColors!:any[]; 
-  totalDistance!: QuickData;
+  data!: QuickData;
 
   constructor(private apiService: ApiService){}
 
@@ -28,11 +27,12 @@ ngOnInit() {
   this.getData();
   this.getTotalDistanceStats().subscribe({
     next: (response) => {
-      this.totalDistance = response;
+      this.data = response;
+      console.log(this.data)
     },
     error: (error) => {
       console.error('Error fetching athlete stats:', error);
-      this.totalDistance = {
+      this.data = {
         title: 'Total Distance',
         value: 0,
         units: 'miles',
