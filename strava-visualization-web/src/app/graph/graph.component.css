@@ -16,6 +16,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto); 
-    gap: 5rem; 
+    gap: 2rem; 
     width: 80%; 
 }
