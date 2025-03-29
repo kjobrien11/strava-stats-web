@@ -52,9 +52,9 @@ export class GraphComponent implements OnInit {
         this.totalDistanceData = { title: 'Total Distance', value: 0, units: 'Miles' };
         this.totalTimeData = { title: 'Total Time', value: 0, units: 'Seconds' };
         this.totalRunsData = { title: 'Total Runs', value: 0, units: 'Count' };
-        this.avgerageSpeedData = { title: 'Average Speed', value: 0, units: 'MPH' };
-        this.averageHeartRateData = { title: 'Average Heart Rate', value: 0, units: 'BPM' };
         this.longestRunData = { title: 'Longest Run', value: 0, units: 'Miles' };
+        this.averageHeartRateData = { title: 'Average Heart Rate', value: 0, units: 'BPM' };
+        this.avgerageSpeedData = { title: 'Average Speed', value: 0, units: 'MPH' };
       }
     });
   }
