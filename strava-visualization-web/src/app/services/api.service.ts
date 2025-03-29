@@ -16,6 +16,9 @@ export class ApiService {
   totalDistanceUrl: string = "/distance-miles";
   totalTimeUrl: string = "/time";
   totalRunUrl:string =  "/run-count";
+  longestRunUrl:string =  "/longest-run";
+  avgHeartRateUrl:string =  "/average-heartrate";
+  avgSpeedUrl:string =  "/average-speed";
 
 
   weeklyWorkoutData!: WeeklyTotal[];
@@ -102,4 +105,15 @@ export class ApiService {
       return this.http.get<QuickData>(this.baseUrl +this.totalRunUrl);
     }
 
+    public getAverageHeartRate(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.baseUrl +this.avgHeartRateUrl);
+    }
+
+    public getAverageSpeed(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.baseUrl +this.avgSpeedUrl);
+    }
+
+    public getLongestRun(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.baseUrl +this.longestRunUrl);
+    }
 }

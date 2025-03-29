@@ -5,7 +5,7 @@ import { Workout } from '../workout';
 import { WeeklyTotal } from '../weekly-total';
 import { DataBoxComponent } from '../data-box/data-box.component';
 import { QuickData } from '../quick-data';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -22,56 +22,43 @@ export class GraphComponent implements OnInit {
   totalDistanceData!: QuickData;
   totalTimeData!: QuickData;
   totalRunsData!: QuickData;
+  avgerageSpeedData!: QuickData;
+  averageHeartRateData!: QuickData;
+  longestRunData!: QuickData;
 
   constructor(private apiService: ApiService){}
 
-ngOnInit() {
-  this.getData();
-  this.apiService.getTotalDistanceStats().subscribe({
-    next: (response) => {
-      this.totalDistanceData = response;
-      console.log(this.totalDistanceData)
-    },
-    error: (error) => {
-      console.error('Error fetching athlete stats:', error);
-      this.totalDistanceData = {
-        title: 'Total Distance',
-        value: 0,
-        units: 'miles',
-      };
-    }
-  });
+  ngOnInit() {
+    this.getData();
 
-  this.apiService.getTotalWorkoutTimeInSeconds().subscribe({
-    next: (response) => {
-      this.totalTimeData = response;
-      console.log(this.totalTimeData)
-    },
-    error: (error) => {
-      console.error('Error fetching athlete stats:', error);
-      this.totalTimeData = {
-        title: 'Total Distance',
-        value: 0,
-        units: 'miles',
-      };
-    }
-  });
+    forkJoin({
+      totalDistance: this.apiService.getTotalDistanceStats(),
+      totalTime: this.apiService.getTotalWorkoutTimeInSeconds(),
+      totalRuns: this.apiService.getTotalRuns(),
+      averageSpeed: this.apiService.getAverageSpeed(),
+      avgerageHearRate: this.apiService.getAverageHeartRate(),
+      longestRun: this.apiService.getLongestRun()
+    }).subscribe({
+      next: ({ totalDistance, totalTime, totalRuns, averageSpeed, avgerageHearRate, longestRun }) => {
+        this.totalDistanceData = totalDistance;
+        this.totalTimeData = totalTime;
+        this.totalRunsData = totalRuns;
+        this.avgerageSpeedData = averageSpeed;
+        this.averageHeartRateData = avgerageHearRate;
+        this.longestRunData = longestRun;
+      },
+      error: (error) => {
+        console.error('Error fetching athlete stats:', error);
+        this.totalDistanceData = { title: 'Total Distance', value: 0, units: 'Miles' };
+        this.totalTimeData = { title: 'Total Time', value: 0, units: 'Seconds' };
+        this.totalRunsData = { title: 'Total Runs', value: 0, units: 'Count' };
+        this.avgerageSpeedData = { title: 'Average Speed', value: 0, units: 'MPH' };
+        this.averageHeartRateData = { title: 'Average Heart Rate', value: 0, units: 'BPM' };
+        this.longestRunData = { title: 'Longest Run', value: 0, units: 'Miles' };
+      }
+    });
+  }
 
-  this.apiService.getTotalRuns().subscribe({
-    next: (response) => {
-      this.totalRunsData = response;
-      console.log(this.totalRunsData)
-    },
-    error: (error) => {
-      console.error('Error fetching athlete stats:', error);
-      this.totalRunsData = {
-        title: 'Total Distance',
-        value: 0,
-        units: 'miles',
-      };
-    }
-  });
-}
 
   getData(){
     this.lineChartData = this.apiService.getLineChartData();
