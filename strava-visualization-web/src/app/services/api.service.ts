@@ -10,9 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  weeklyUrl: string = "http://localhost:8080/weekly-totals";
-  cumulativeUrl: string = "http://localhost:8080/cumulative-totals";
-  totalDistanceUrl: string = "http://localhost:8080/distance-miles"
+  baseUrl: string = "http://localhost:8080";
+  weeklyUrl: string = "/weekly-totals";
+  cumulativeUrl: string = "/cumulative-totals";
+  totalDistanceUrl: string = "/distance-miles";
+  totalTimeUrl: string = "/time";
+  totalRunUrl:string =  "/run-count";
+
+
   weeklyWorkoutData!: WeeklyTotal[];
   cumulativeWorkoutData!: WeeklyTotal[];
 
@@ -21,7 +26,7 @@ export class ApiService {
   }
 
   private intializeData(): void {
-    this.http.get<WeeklyTotal[]>(this.weeklyUrl).subscribe({
+    this.http.get<WeeklyTotal[]>(this.baseUrl + this.weeklyUrl).subscribe({
       next: (response) => {
         this.weeklyWorkoutData = response;
       },
@@ -29,7 +34,7 @@ export class ApiService {
         console.error('Error fetching athlete stats:', error);
       }
     });
-    this.http.get<WeeklyTotal[]>(this.cumulativeUrl).subscribe({
+    this.http.get<WeeklyTotal[]>(this.baseUrl +this.cumulativeUrl).subscribe({
       next: (response) => {
         this.cumulativeWorkoutData = response;
       },
@@ -86,7 +91,15 @@ export class ApiService {
     }
   
     public getTotalDistanceStats(): Observable<QuickData> {
-      return this.http.get<QuickData>(this.totalDistanceUrl);
+      return this.http.get<QuickData>(this.baseUrl +this.totalDistanceUrl);
+    }
+
+    public getTotalWorkoutTimeInSeconds(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.baseUrl +this.totalTimeUrl);
+    }
+
+    public getTotalRuns(): Observable<QuickData> {
+      return this.http.get<QuickData>(this.baseUrl +this.totalRunUrl);
     }
 
 }

@@ -19,30 +19,58 @@ export class GraphComponent implements OnInit {
   lineChartData!: any[];
   barChartData!:any[]
   customColors!:any[]; 
-  data!: QuickData;
+  totalDistanceData!: QuickData;
+  totalTimeData!: QuickData;
+  totalRunsData!: QuickData;
 
   constructor(private apiService: ApiService){}
 
 ngOnInit() {
   this.getData();
-  this.getTotalDistanceStats().subscribe({
+  this.apiService.getTotalDistanceStats().subscribe({
     next: (response) => {
-      this.data = response;
-      console.log(this.data)
+      this.totalDistanceData = response;
+      console.log(this.totalDistanceData)
     },
     error: (error) => {
       console.error('Error fetching athlete stats:', error);
-      this.data = {
+      this.totalDistanceData = {
         title: 'Total Distance',
         value: 0,
         units: 'miles',
       };
     }
   });
-}
 
-public getTotalDistanceStats(): Observable<QuickData> {
-  return this.apiService.getTotalDistanceStats();
+  this.apiService.getTotalWorkoutTimeInSeconds().subscribe({
+    next: (response) => {
+      this.totalTimeData = response;
+      console.log(this.totalTimeData)
+    },
+    error: (error) => {
+      console.error('Error fetching athlete stats:', error);
+      this.totalTimeData = {
+        title: 'Total Distance',
+        value: 0,
+        units: 'miles',
+      };
+    }
+  });
+
+  this.apiService.getTotalRuns().subscribe({
+    next: (response) => {
+      this.totalRunsData = response;
+      console.log(this.totalRunsData)
+    },
+    error: (error) => {
+      console.error('Error fetching athlete stats:', error);
+      this.totalRunsData = {
+        title: 'Total Distance',
+        value: 0,
+        units: 'miles',
+      };
+    }
+  });
 }
 
   getData(){
